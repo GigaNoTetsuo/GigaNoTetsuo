@@ -160,6 +160,9 @@ srtop.reveal('.education .box', { interval: 200 });
 /* SCROLL PROJECTS */
 srtop.reveal('.work .box', { interval: 200 });
 
+/* SCROLL CERTIFICATION */
+srtop.reveal('.certification .cert-card', { interval: 150 });
+
 /* SCROLL EXPERIENCE */
 srtop.reveal('.experience .exp-nav-column', { delay: 200 });
 srtop.reveal('.experience .exp-display-column', { delay: 350 });
