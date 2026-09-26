@@ -170,30 +170,18 @@ srtop.reveal('.experience .exp-display-column', { delay: 350 });
 srtop.reveal('.contact .container', { delay: 400 });
 srtop.reveal('.contact .container .form-group', { delay: 400 });
 
-/* ===== INTERACTIVE EXPERIENCE SLIDER & HOVER ===== */
+/* ===== INTERACTIVE EXPERIENCE SELECTOR ===== */
 (function initExperienceInteractive() {
     const expNavItems = document.querySelectorAll('.exp-nav-item');
     const expCards = document.querySelectorAll('.exp-detail-card');
     const expDots = document.querySelectorAll('.exp-dot');
     const expLineFill = document.getElementById('expLineFill');
-    const expProgressBar = document.getElementById('expProgressBar');
-    const expStatusText = document.getElementById('expStatusText');
-    const expStatusBadge = document.querySelector('.exp-banner-status');
-    const expDisplay = document.getElementById('expDisplay');
 
     if (!expNavItems.length || !expCards.length) return;
 
-    let currentIndex = 0;
     const totalItems = expNavItems.length;
-    let isHovered = false;
-    let progressInterval = null;
-    const slideDuration = 4000; // 4 seconds per slide
-    const progressUpdateStep = 40; // 40ms updates for fluid progress
-    let progressElapsed = 0;
 
-    function setActiveExperience(index, triggeredByHover = false) {
-        currentIndex = index;
-
+    function setActiveExperience(index) {
         // Update Nav items on left
         expNavItems.forEach((item, idx) => {
             if (idx === index) {
@@ -226,106 +214,23 @@ srtop.reveal('.contact .container .form-group', { delay: 400 });
             const fillPercent = totalItems > 1 ? (index / (totalItems - 1)) * 100 : 100;
             expLineFill.style.height = `${fillPercent}%`;
         }
-
-        // Reset progress on slide change
-        progressElapsed = 0;
-        if (expProgressBar) {
-            expProgressBar.style.width = '0%';
-        }
-
-        // Update status indicator
-        if (expStatusText && expStatusBadge) {
-            if (triggeredByHover) {
-                const companyName = expNavItems[index].querySelector('.exp-company-name')?.innerText || 'Experience';
-                expStatusText.innerText = `Viewing: ${companyName}`;
-                expStatusBadge.classList.add('paused');
-            } else {
-                expStatusText.innerText = 'Auto-sliding Banner';
-                expStatusBadge.classList.remove('paused');
-            }
-        }
-    }
-
-    function startAutoSlide() {
-        stopAutoSlide();
-        if (isHovered) return;
-
-        if (expStatusBadge) expStatusBadge.classList.remove('paused');
-        if (expStatusText) expStatusText.innerText = 'Auto-sliding Banner';
-
-        progressElapsed = 0;
-        progressInterval = setInterval(() => {
-            if (isHovered) return;
-            progressElapsed += progressUpdateStep;
-            const progressPercent = Math.min((progressElapsed / slideDuration) * 100, 100);
-            if (expProgressBar) {
-                expProgressBar.style.width = `${progressPercent}%`;
-            }
-            if (progressElapsed >= slideDuration) {
-                progressElapsed = 0;
-                const nextIndex = (currentIndex + 1) % totalItems;
-                setActiveExperience(nextIndex, false);
-            }
-        }, progressUpdateStep);
-    }
-
-    function stopAutoSlide() {
-        if (progressInterval) {
-            clearInterval(progressInterval);
-            progressInterval = null;
-        }
-        if (expProgressBar) {
-            expProgressBar.style.width = '0%';
-        }
     }
 
     // Attach hover and click listeners to left navigation items
     expNavItems.forEach((item, index) => {
-        item.addEventListener('mouseenter', () => {
-            isHovered = true;
-            stopAutoSlide();
-            setActiveExperience(index, true);
-        });
-
-        item.addEventListener('mouseleave', () => {
-            isHovered = false;
-            startAutoSlide();
-        });
-
+        item.addEventListener('mouseenter', () => setActiveExperience(index));
         item.addEventListener('click', (e) => {
             e.preventDefault();
-            isHovered = true;
-            stopAutoSlide();
-            setActiveExperience(index, true);
+            setActiveExperience(index);
         });
     });
-
-    // Pause auto-sliding when hovering over the right detail display column
-    if (expDisplay) {
-        expDisplay.addEventListener('mouseenter', () => {
-            isHovered = true;
-            stopAutoSlide();
-            if (expStatusBadge) expStatusBadge.classList.add('paused');
-            if (expStatusText) expStatusText.innerText = 'Banner Paused (Reading)';
-        });
-
-        expDisplay.addEventListener('mouseleave', () => {
-            isHovered = false;
-            startAutoSlide();
-        });
-    }
 
     // Attach click to dots
     expDots.forEach((dot, index) => {
-        dot.addEventListener('click', () => {
-            isHovered = true;
-            stopAutoSlide();
-            setActiveExperience(index, true);
-        });
+        dot.addEventListener('click', () => setActiveExperience(index));
     });
 
-    // Initialize first item and start auto-sliding
-    setActiveExperience(0, false);
-    startAutoSlide();
+    // Initialize first item
+    setActiveExperience(0);
 })();
  
