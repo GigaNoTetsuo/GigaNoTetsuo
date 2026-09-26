@@ -441,28 +441,35 @@ header .navbar ul li a:hover {
 .about .row {
   display: flex;
   flex-direction: row;
-  gap: 2rem;
+  align-items: flex-start;
+  gap: 3.5rem;
   flex-wrap: wrap;
-  padding: 4rem;
+  padding: 2.5rem 0;
+  max-width: 1300px;
+  margin: 0 auto;
 }
 .about .row .image {
+  flex: 0 0 26rem;
   text-align: center;
-  flex: 1 1 35rem;
+  margin: 0;
 }
 .about .row .image img {
-  margin: 4rem;
-  width: 30rem;
+  margin: 0;
+  width: 100%;
+  max-width: 26rem;
   height: auto;
-  border-radius: 5%;
-  transition: 0.3s;
+  border-radius: 1.6rem;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+  transition: 0.3s ease;
   cursor: pointer;
 }
 .about .row .image img:hover {
-  mix-blend-mode: normal;
+  transform: translateY(-5px);
+  box-shadow: 0 15px 35px rgba(255, 123, 0, 0.25);
 }
 .about .row .content {
-  flex: 1 1 45rem;
-  padding: 3rem;
+  flex: 1 1 65rem;
+  padding: 0 1rem;
 }
 .about .row .content h3 {
   color: var(--text-color);
