@@ -1,0 +1,12 @@
+{
+  "name": "obaid-sajjad-portfolio",
+  "version": "1.0.0",
+  "description": "Obaid Sajjad - AI Engineer Portfolio Website",
+  "scripts": {
+    "dev": "live-server --port=8080",
+    "start": "live-server --port=8080"
+  },
+  "devDependencies": {
+    "live-server": "^1.2.2"
+  }
+}
