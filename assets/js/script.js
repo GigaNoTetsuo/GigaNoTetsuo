@@ -51,12 +51,11 @@ document.addEventListener('visibilitychange',
 // <!-- typed js effect starts -->
 var typed = new Typed(".typing-text", {
     strings: [
-        "LLM Fine-Tuning & PEFT",
-        "Multi-Agent Systems (LangGraph)",
-        "Enterprise RAG Solutions",
-        "Autonomous AI Agents",
-        "AWS SageMaker & Bedrock",
-        "Scalable AI Pipelines"
+        "Large language models",
+        "Multimodal LLMs",
+        "LLMs reasoning",
+        "AI security and Guardrails",
+        "PEFT/ RLHF"
     ],
     loop: true,
     typeSpeed: 50,
