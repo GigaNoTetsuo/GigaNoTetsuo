@@ -151,8 +151,7 @@ srtop.reveal('.about .content .resumebtn', { delay: 200 });
 
 
 /* SCROLL SKILLS */
-srtop.reveal('.skills .container', { interval: 200 });
-srtop.reveal('.skills .container .bar', { delay: 400 });
+srtop.reveal('.skills .skills-category-card', { interval: 200 });
 
 /* SCROLL EDUCATION */
 srtop.reveal('.education .box', { interval: 200 });
